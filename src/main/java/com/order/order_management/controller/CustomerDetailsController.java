@@ -18,6 +18,7 @@ public class CustomerDetailsController {
 
     @PostMapping("/Customer_Details")
     public String newCustomer(CustomerDetails customerDetails){
+
         return customerService.saveCustomer(customerDetails);
     }
     @PostMapping("/login")
