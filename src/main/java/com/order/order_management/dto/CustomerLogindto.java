@@ -8,7 +8,7 @@ import org.antlr.v4.runtime.misc.NotNull;
 @Getter
 @Setter
 @ToString
-public class CustomerLogin_dto {
+public class CustomerLogindto {
 
     @NotNull
     private String email;

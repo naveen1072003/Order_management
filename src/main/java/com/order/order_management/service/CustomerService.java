@@ -1,6 +1,6 @@
 package com.order.order_management.service;
 
-import com.order.order_management.dto.CustomerLogin_dto;
+import com.order.order_management.dto.CustomerLogindto;
 import com.order.order_management.entity.CustomerDetails;
 import com.order.order_management.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ public class CustomerService {
         return "Added successfully!";
     }
 
-    public String loginAuthentication(CustomerLogin_dto customerLoginDto){
+    public String loginAuthentication(CustomerLogindto customerLoginDto){
         CustomerDetails customerDetails = customerRepository.findByEmail(customerLoginDto.getEmail());
 
         if(customerDetails == null){
