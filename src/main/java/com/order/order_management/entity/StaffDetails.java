@@ -8,6 +8,7 @@ public class StaffDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "staff_id")
     private long id;
     @Column
     private String fname;
@@ -21,5 +22,8 @@ public class StaffDetails {
     private String password;
     @Column
     private String role;
+
+    @OneToOne(mappedBy = "staffDetails")
+    private OrdersDetails ordersDetails;
 
 }

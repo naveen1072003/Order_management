@@ -1,6 +1,6 @@
 package com.order.order_management.controller;
 
-import com.order.order_management.dto.CustomerLogin_dto;
+import com.order.order_management.dto.CustomerLogindto;
 import com.order.order_management.entity.CustomerDetails;
 import com.order.order_management.repository.CustomerRepository;
 import com.order.order_management.service.CustomerService;
@@ -21,9 +21,10 @@ public class CustomerDetailsController {
 
         return customerService.saveCustomer(customerDetails);
     }
-    @PostMapping("/login")
-    public String login(CustomerLogin_dto customerLoginDto){
 
+    // UserLogin
+    @PostMapping("/login")
+    public String login(CustomerLogindto customerLoginDto){
         return customerService.loginAuthentication(customerLoginDto);
     }
 

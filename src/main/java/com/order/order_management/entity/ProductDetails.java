@@ -26,6 +26,8 @@ public class ProductDetails {
 //    @Column(name="thumbnail")
 //    private String prod_img;
 
+
+
     @Column(name = "prod_desc")
     private String prod_desc;
 
@@ -35,5 +37,9 @@ public class ProductDetails {
     @Column
     private int quantity;
 
-    private Long cat_id;
+    //Relation btwn Product and their Category
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "category_id", referencedColumnName = "category_id")
+    private ProductCategory category;
 }

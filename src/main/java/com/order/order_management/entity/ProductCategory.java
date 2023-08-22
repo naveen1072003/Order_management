@@ -1,10 +1,13 @@
 package com.order.order_management.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+@Entity
+@Table(name = "prod_category")
+@Getter
+@Setter
 public class ProductCategory {
 
     @Id
@@ -14,4 +17,7 @@ public class ProductCategory {
 
     @Column
     private String category_name;
+
+    @OneToOne(mappedBy = "category")
+    private ProductDetails productDetails;
 }

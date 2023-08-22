@@ -11,12 +11,17 @@ public class OrdersDetails {
     @Column(name = "ord_id")
     private String ord_id;
 
-    @Column(name = "prod_quantity")
-    private Long prod_quantity;
+//    @Column(name = "prod_quantity")
+//    private Long prod_quantity;
 
     @Column
     private String ord_date;
 
     @Column
     private String ord_status;
+
+    //Relation btwn order and staff handled the order
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "ref_staff_id", referencedColumnName = "staff_id")
+    private StaffDetails staffDetails;
 }
