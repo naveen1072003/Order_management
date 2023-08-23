@@ -16,11 +16,13 @@ public class AdminController {
 
     @PostMapping("/addStaff")
     public String saveStaff(StaffDetails staffDetails){
+
         return adminService.saveStaffDetails(staffDetails);
     }
 
     @PostMapping("/removeStaff")
     public String removeStaff(Long id){
+
         return adminService.deleteStaff(id);
     }
 }

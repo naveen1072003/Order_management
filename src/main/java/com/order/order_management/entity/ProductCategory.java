@@ -18,6 +18,6 @@ public class ProductCategory {
     @Column
     private String category_name;
 
-    @OneToOne(mappedBy = "category")
-    private ProductDetails productDetails;
+//    @OneToMany()
+//    private ProductDetails productDetails;
 }

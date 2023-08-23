@@ -38,7 +38,7 @@ public class CustomerDetails {
     private String cust_dob;
 
     @Column
-    private String cust_email;
+    private String email;
 
     @Column
     private String password;

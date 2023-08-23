@@ -4,6 +4,7 @@ import com.order.order_management.dto.CustomerLogindto;
 import com.order.order_management.entity.CustomerDetails;
 import com.order.order_management.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -12,20 +13,25 @@ public class CustomerService {
     @Autowired
     private CustomerRepository customerRepository;
 
-    public String saveCustomer(CustomerDetails customerDetails){
+
+    public ResponseEntity<?> saveCustomer(CustomerDetails customerDetails){
         customerRepository.save(customerDetails);
-        return "Added successfully!";
+        System.out.println(customerDetails);
+        return ResponseEntity.ok("Added successfullly.");
+//        return "Added successfully!";
     }
 
-    public String loginAuthentication(CustomerLogindto customerLoginDto){
+    public ResponseEntity<?> loginAuthentication(CustomerLogindto customerLoginDto){
         CustomerDetails customerDetails = customerRepository.findByEmail(customerLoginDto.getEmail());
 
         if(customerDetails == null){
-            return "User does not exist!";
+            return ResponseEntity.ok("User does not exist!");
         }
         else if(!customerDetails.getPassword().equals(customerLoginDto.getPassword())){
-            return "You have entered wrong password";
+//            System.out.println("Login unsuccess");
+            return ResponseEntity.ok("You have entered wrong password");
         }
-        return "Logged in successsful!";
+//        System.out.println("Login success");
+        return ResponseEntity.ok("Logged in successsful!");
     }
 }
