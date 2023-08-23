@@ -35,5 +35,10 @@ public class ProductDetails {
     @Column
     private int quantity;
 
+    //Relation btwn Product and their Category
 
+
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "category_id", referencedColumnName = "category_id")
+//    private ProductCategory category;
 }
