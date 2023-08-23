@@ -18,6 +18,4 @@ public class ProductCategory {
     @Column
     private String category_name;
 
-    @OneToMany(mappedBy = "category")
-    private ProductDetails productDetails;
 }
