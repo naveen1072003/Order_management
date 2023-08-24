@@ -35,9 +35,13 @@ public class ProductDetails {
     @Column(name = "quantity")
     private int quantity;
 
-    //Relation btwn Product and their Category
+    private Long category_id;
 
-    @ManyToOne(targetEntity = ProductCategory.class ,cascade = CascadeType.ALL)
-    @JoinColumn(name = "category_id", referencedColumnName = "category_id")
-    private ProductCategory category;
+    //Relation btwn Product and their Category
+//    @ManyToOne(cascade = CascadeType.PERSIST)
+//    @JoinColumn(name = "category_id")
+//    private ProductCategory category;
+//    @ManyToOne(targetEntity = ProductCategory.class ,cascade = CascadeType.ALL)
+//    @JoinColumn(name = "category_id", referencedColumnName = "category_id")
+
 }
