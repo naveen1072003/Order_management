@@ -30,8 +30,6 @@ public class ProductDetailsController {
     public String addProducts(@RequestBody ProductDetailsDTO productDetailsDTO){
         ProductDetails productDetails = new ProductDetails();
         Optional<ProductCategory> productCategory = categoryRepository.findById(productDetailsDTO.getCategoryId());
-
-
         productDetails.setCategory(productCategory.get());
         productDetails.setProd_name(productDetailsDTO.getProductName());
         productDetails.setProd_desc(productDetailsDTO.getProd_desc());
