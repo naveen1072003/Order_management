@@ -41,6 +41,7 @@ public class ProductDetails {
 //    @ManyToOne(cascade = CascadeType.PERSIST)
 //    @JoinColumn(name = "category_id")
 //    private ProductCategory category;
+
 //    @ManyToOne(targetEntity = ProductCategory.class ,cascade = CascadeType.ALL)
 //    @JoinColumn(name = "category_id", referencedColumnName = "category_id")
 

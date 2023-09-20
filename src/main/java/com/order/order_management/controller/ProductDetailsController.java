@@ -28,14 +28,6 @@ public class ProductDetailsController {
 
     @PostMapping("/addProducts")
     public String addProducts(@RequestBody ProductDetails productDetails){
-//        ProductDetails productDetails = new ProductDetails();
-//        ProductCategory productCategory = categoryRepository.findById(productDetailsDTO.getCategoryId()).get();
-//        productDetails.setCategory(productCategory);
-//        productDetails.setProd_name(productDetailsDTO.getProductName());
-//        productDetails.setProd_desc(productDetailsDTO.getProd_desc());
-//        productDetails.setProd_price(productDetailsDTO.getProd_price());
-//        productDetails.setQuantity(productDetailsDTO.getQuantity());
-
         return detailsService.saveProduct(productDetails);
     }
 

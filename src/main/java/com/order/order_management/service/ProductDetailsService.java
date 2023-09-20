@@ -42,7 +42,6 @@ public class ProductDetailsService {
         updateDetails.setQuantity(productDetails.getQuantity());
         updateDetails.setProd_price(productDetails.getProd_price());
 //        updateDetails.setCategory(productDetails.getCategory());
-
         productRepository.save(updateDetails);
 
     }
