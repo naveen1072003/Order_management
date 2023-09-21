@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.List;
+
 @Entity
 @Table(name = "cust_details")
 @Getter
@@ -46,7 +48,8 @@ public class CustomerDetails {
     @Column
     private Double cust_wallet_balance;
 
-
-
+    @OneToMany
+    @JoinColumn(name = "r_id")
+    private List<CustomerReview> reviewList;
 
 }

@@ -7,6 +7,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.io.InputStream;
+import java.util.List;
 
 @Entity
 @Table(name = "prouct_details")
@@ -35,14 +36,12 @@ public class ProductDetails {
     @Column(name = "quantity")
     private int quantity;
 
-    private Long category_id;
-
     //Relation btwn Product and their Category
-//    @ManyToOne(cascade = CascadeType.PERSIST)
-//    @JoinColumn(name = "category_id")
-//    private ProductCategory category;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "category_id")
+    private ProductCategory category;
 
-//    @ManyToOne(targetEntity = ProductCategory.class ,cascade = CascadeType.ALL)
-//    @JoinColumn(name = "category_id", referencedColumnName = "category_id")
+    @OneToMany(mappedBy = "customerDetails", cascade = CascadeType.ALL)
+    private List<CustomerReview> reviews;
 
 }

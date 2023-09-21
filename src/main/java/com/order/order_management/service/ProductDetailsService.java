@@ -4,10 +4,11 @@ import com.order.order_management.entity.ProductCategory;
 import com.order.order_management.entity.ProductDetails;
 import com.order.order_management.repository.CategoryRepository;
 import com.order.order_management.repository.ProductRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
+
+import java.util.List;
 
 @Service
 public class ProductDetailsService {
@@ -15,12 +16,10 @@ public class ProductDetailsService {
     @Autowired
     private ProductRepository productRepository;
 
-    @Autowired
-    private CategoryRepository categoryRepository;
 
     public String saveProduct(ProductDetails productDetails){
-        Long cat_id = productDetails.getCategory_id();
-        ProductCategory productCategory = categoryRepository.findById(cat_id).get();
+
+
 
         productRepository.save(productDetails);
         return "Product Added Successfully!";
@@ -44,5 +43,10 @@ public class ProductDetailsService {
 //        updateDetails.setCategory(productDetails.getCategory());
         productRepository.save(updateDetails);
 
+    }
+
+
+    public List<ProductDetails> getAllProducts() {
+        return productRepository.findAll();
     }
 }

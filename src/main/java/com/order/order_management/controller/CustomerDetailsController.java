@@ -2,6 +2,7 @@ package com.order.order_management.controller;
 
 import com.order.order_management.dto.CustomerLogindto;
 import com.order.order_management.entity.CustomerDetails;
+import com.order.order_management.entity.CustomerReview;
 import com.order.order_management.repository.CustomerRepository;
 import com.order.order_management.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,8 +34,8 @@ public class CustomerDetailsController {
         return customerService.loginAuthentication(customerLoginDto);
     }
 
-//    @RequestMapping("/forgotpassword")
-//    public String forgotPass(){
-//        return customerService.
-//    }
+    @PostMapping("/addReview")
+    public String addReview(@RequestBody CustomerReview review){
+        return customerService.addReview(review);
+    }
 }

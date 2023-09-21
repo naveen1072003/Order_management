@@ -2,7 +2,9 @@ package com.order.order_management.service;
 
 import com.order.order_management.dto.CustomerLogindto;
 import com.order.order_management.entity.CustomerDetails;
+import com.order.order_management.entity.CustomerReview;
 import com.order.order_management.repository.CustomerRepository;
+import com.order.order_management.repository.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,8 @@ public class CustomerService {
     @Autowired
     private CustomerRepository customerRepository;
 
+    @Autowired
+    private ReviewRepository reviewRepository;
 
     public ResponseEntity<?> saveCustomer(CustomerDetails customerDetails){
         customerRepository.save(customerDetails);
@@ -33,5 +37,10 @@ public class CustomerService {
         }
 //        System.out.println("Login success");
         return ResponseEntity.ok("Logged in successsful!");
+    }
+
+    public String addReview(CustomerReview review) {
+        reviewRepository.save(review);
+        return "Added";
     }
 }

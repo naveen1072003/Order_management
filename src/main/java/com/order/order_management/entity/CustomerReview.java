@@ -21,8 +21,12 @@ public class CustomerReview {
     @Column(name = "review_stars")
     private String r_stars;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "cust_id" ,referencedColumnName = "cust_id")
+    @ManyToOne
+    @JoinColumn(name = "prod_id")
+    private ProductDetails productDetails;
+
+    @ManyToOne
     private CustomerDetails customerDetails;
+
 
 }

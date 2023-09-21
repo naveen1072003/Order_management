@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CategoryService {
 
@@ -19,6 +21,8 @@ public class CategoryService {
         categoryRepository.save(category);
         return ResponseEntity.ok("Category Added!");
     }
-
+    public List<ProductCategory> getCategory() {
+        return categoryRepository.findAll();
+    }
 
 }

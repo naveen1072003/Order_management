@@ -1,8 +1,10 @@
 package com.order.order_management.entity;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +13,7 @@ import java.util.List;
 @Table(name = "prod_category")
 @Getter
 @Setter
+@ToString
 public class ProductCategory {
 
     @Id
@@ -21,6 +24,6 @@ public class ProductCategory {
     @Column
     private String category_name;
 
-//    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
-//    private List<ProductDetails> products = new ArrayList<>();
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<ProductDetails> products;
 }
