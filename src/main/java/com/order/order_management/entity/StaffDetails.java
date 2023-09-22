@@ -1,9 +1,18 @@
 package com.order.order_management.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Entity
 @Table(name = "staff_details")
+@Getter
+@Setter
+@ToString
 public class StaffDetails {
 
     @Id
@@ -23,7 +32,6 @@ public class StaffDetails {
     @Column
     private String role;
 
-    @OneToOne(mappedBy = "staffDetails")
-    private OrdersDetails ordersDetails;
-
+    @OneToMany(mappedBy = "staffDetails")
+    private List<OrdersDetails> ordersDetails;
 }

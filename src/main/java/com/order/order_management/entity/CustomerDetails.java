@@ -15,7 +15,6 @@ import java.util.List;
 public class CustomerDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "cust_id")
     private Long id;
 
     @Column
@@ -48,8 +47,7 @@ public class CustomerDetails {
     @Column
     private Double cust_wallet_balance;
 
-    @OneToMany
-    @JoinColumn(name = "r_id")
+    @OneToMany(targetEntity = CustomerReview.class,mappedBy = "customers")
     private List<CustomerReview> reviewList;
 
 }

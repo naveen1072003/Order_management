@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class CustomerService {
 
@@ -40,6 +42,11 @@ public class CustomerService {
     }
 
     public String addReview(CustomerReview review) {
+        CustomerReview customerReview = reviewRepository.findByProductIdAndCustomerId(review.getProductDetails().getId(),review.getCustomers().getId());
+        System.out.println(customerReview);
+        if(customerReview != null){
+            return customerReview.toString();
+        }
         reviewRepository.save(review);
         return "Added";
     }

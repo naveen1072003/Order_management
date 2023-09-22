@@ -2,9 +2,18 @@ package com.order.order_management.entity;
 
 
 import jakarta.persistence.*;
+import jdk.jfr.Name;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+import java.util.List;
 
 @Entity
 @Table(name = "order_details")
+@Getter
+@Setter
+@ToString
 public class OrdersDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,7 +30,12 @@ public class OrdersDetails {
     private String ord_status;
 
     //Relation btwn order and staff handled the order
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "ref_staff_id", referencedColumnName = "staff_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "staff_id")
     private StaffDetails staffDetails;
+
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinColumn(name = "prod_id")
+    private ProductDetails productDetails;
+
 }

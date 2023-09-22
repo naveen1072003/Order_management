@@ -10,7 +10,7 @@ import java.io.InputStream;
 import java.util.List;
 
 @Entity
-@Table(name = "prouct_details")
+@Table(name = "product_details")
 @Getter
 @Setter
 @ToString
@@ -34,14 +34,13 @@ public class ProductDetails {
     private String prod_price;
 
     @Column(name = "quantity")
-    private int quantity;
+    private String quantity;
 
     //Relation btwn Product and their Category
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id")
     private ProductCategory category;
 
-    @OneToMany(mappedBy = "customerDetails", cascade = CascadeType.ALL)
-    private List<CustomerReview> reviews;
-
+    @OneToMany(mappedBy = "productDetails")
+    private List<OrdersDetails> ordersDetails;
 }

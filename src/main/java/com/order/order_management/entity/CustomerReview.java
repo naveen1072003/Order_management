@@ -3,11 +3,13 @@ package com.order.order_management.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Table(name = "review")
 @Getter
 @Setter
+@ToString
 public class CustomerReview {
 
     @Id
@@ -25,8 +27,9 @@ public class CustomerReview {
     @JoinColumn(name = "prod_id")
     private ProductDetails productDetails;
 
-    @ManyToOne
-    private CustomerDetails customerDetails;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private CustomerDetails customers;
 
 
 }
