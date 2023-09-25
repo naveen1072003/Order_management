@@ -54,7 +54,7 @@ public class ProductDetailsController {
         return categoryService.addCategory(category);
     }
 
-    @GetMapping("/getCategory")
+    @GetMapping("/getAllCategory")
     public List<ProductCategory> productCategories(){
         List<ProductCategory> productCategories = categoryService.getCategory();
         System.out.println(productCategories);

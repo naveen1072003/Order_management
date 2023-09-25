@@ -1,5 +1,6 @@
 package com.order.order_management.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -32,6 +33,7 @@ public class StaffDetails {
     @Column
     private String role;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "staffDetails")
     private List<OrdersDetails> ordersDetails;
 }

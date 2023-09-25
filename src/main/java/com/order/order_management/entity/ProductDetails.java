@@ -1,6 +1,7 @@
 package com.order.order_management.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -41,6 +42,7 @@ public class ProductDetails {
     @JoinColumn(name = "category_id")
     private ProductCategory category;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "productDetails")
     private List<OrdersDetails> ordersDetails;
 }

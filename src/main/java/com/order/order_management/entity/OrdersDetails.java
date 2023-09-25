@@ -34,8 +34,12 @@ public class OrdersDetails {
     @JoinColumn(name = "staff_id")
     private StaffDetails staffDetails;
 
-    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "prod_id")
     private ProductDetails productDetails;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "customer_id")
+    private CustomerDetails customerDetails;
 
 }

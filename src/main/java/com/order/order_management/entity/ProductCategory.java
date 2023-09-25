@@ -1,5 +1,6 @@
 package com.order.order_management.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -24,6 +25,7 @@ public class ProductCategory {
     @Column
     private String category_name;
 
-    @OneToMany(fetch = FetchType.LAZY)
+//    @JsonIgnore
+    @OneToMany(mappedBy = "category")
     private List<ProductDetails> products;
 }

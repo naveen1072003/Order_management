@@ -10,17 +10,17 @@ import com.order.order_management.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/customer")
 public class CustomerDetailsController {
 
     @Autowired
-    private CustomerService customerService;
+    private CustomerService
+            customerService;
 
     @Autowired
     private OrderService orderService;
@@ -51,4 +51,15 @@ public class CustomerDetailsController {
         orderService.placeOrder(ordersDetails);
         return "Order Added!!!";
     }
+
+    @GetMapping("/getAllOrders")
+    public List<OrdersDetails> ordersDetails(){
+        return customerService.getOrders();
+    }
+
+    @GetMapping("/getAllCustomers")
+    public List<CustomerDetails>  customerDetails(){
+        return customerService.getCustomers();
+    }
+
 }
