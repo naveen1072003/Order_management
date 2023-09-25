@@ -33,7 +33,4 @@ public class StaffDetails {
     @Column
     private String role;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "staffDetails")
-    private List<OrdersDetails> ordersDetails;
 }

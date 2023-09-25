@@ -48,12 +48,4 @@ public class CustomerDetails {
     @Column
     private Double cust_wallet_balance;
 
-    @JsonIgnore
-    @OneToMany(targetEntity = CustomerReview.class, mappedBy = "customers")
-    private List<CustomerReview> reviewList;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "customerDetails")
-    private List<OrdersDetails> ordersDetails;
-
 }

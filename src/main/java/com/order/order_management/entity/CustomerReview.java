@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.List;
+
 @Entity
 @Table(name = "review")
 @Getter
@@ -28,8 +30,9 @@ public class CustomerReview {
     private ProductDetails productDetails;
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private CustomerDetails customers;
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private CustomerDetails customerDetails;
 
 
 }

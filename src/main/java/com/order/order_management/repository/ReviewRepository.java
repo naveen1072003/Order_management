@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ReviewRepository extends JpaRepository<CustomerReview,Long> {
-    @Query("SELECT r FROM CustomerReview r WHERE r.productDetails.id = :productId AND r.customers.id = :customerId")
-    CustomerReview findByProductIdAndCustomerId(Long productId, Long customerId);
+
+    CustomerReview findByCustomerDetails_IdAndAndProductDetails_Id(Long customerId, Long productId);
 }

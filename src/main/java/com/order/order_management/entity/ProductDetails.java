@@ -38,11 +38,8 @@ public class ProductDetails {
     private String quantity;
 
     //Relation btwn Product and their Category
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "category_id")
     private ProductCategory category;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "productDetails")
-    private List<OrdersDetails> ordersDetails;
 }
