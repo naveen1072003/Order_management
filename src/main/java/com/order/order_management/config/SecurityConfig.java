@@ -41,7 +41,7 @@ public class SecurityConfig {
         System.out.println("config");
         return http.cors().and().csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/api/v1/customer/login").permitAll()
+                .requestMatchers("/api/v1/customer/login","/sample/*").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement()
