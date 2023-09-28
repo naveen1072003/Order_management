@@ -25,8 +25,9 @@ public class ProductDetails {
     @Column(name = "prod_name")
     private String prod_name;
 
-//    @Column(name="thumbnail")
-//    private String prod_img;
+    @Lob
+    @Column(columnDefinition = "MEDIUMBLOB")
+    private String prod_image;
 
     @Column(name = "prod_desc")
     private String prod_desc;
