@@ -10,7 +10,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class imageDto {
+public class ImageDto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -18,10 +18,11 @@ public class imageDto {
     @Column
     private String name;
 
-    @Column(length = 100000)
-    private byte[] imageData;
+    @Lob
+    @Column(columnDefinition = "MEDIUMBLOB")
+    private String imageData;
 
-    public imageDto(byte[] imageData,String name){
+    public ImageDto(String imageData, String name){
         this.imageData = imageData;
         this.name = name;
     }
