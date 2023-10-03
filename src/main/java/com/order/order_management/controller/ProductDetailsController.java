@@ -55,9 +55,10 @@ public class ProductDetailsController {
     }
 
 
-    @GetMapping("/getAllProducts")
-    public List<ProductDetails> productDetails(){
-        return detailsService.getAllProducts();
+    @GetMapping("/getAllProducts/{category}")
+    public List<ProductDetails> productDetails(@PathVariable String category){
+        System.out.println(category);
+        return detailsService.getAllProducts(category);
     }
 
     @DeleteMapping("/deleteProduct/{pid}")

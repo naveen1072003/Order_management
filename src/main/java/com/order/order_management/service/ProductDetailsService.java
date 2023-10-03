@@ -43,8 +43,8 @@ public class ProductDetailsService {
     }
 
 
-    public List<ProductDetails> getAllProducts() {
+    public List<ProductDetails> getAllProducts(String category) {
 
-        return productRepository.findAll();
+        return productRepository.findAllByCategory_CategoryName(category);
     }
 }
