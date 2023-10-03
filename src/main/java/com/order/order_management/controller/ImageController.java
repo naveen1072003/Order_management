@@ -31,6 +31,6 @@ public class ImageController {
     @GetMapping("/getImage")
     public String downloadImage(String fileName) {
         List<ImageDto> imageDtoList = imageRepo.findAll();
-        return "data:image/png;base64," + imageDtoList.get(1).getImageData();
+        return "data:image/png;base64," + imageDtoList.get(0).getImageData();
     }
 }

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
@@ -34,16 +35,23 @@ public class ProductDetailsController {
     @Autowired
     CategoryRepository categoryRepository;
 
-    @PostMapping(value = "/addProducts")
-    public String addProducts(
-            @RequestBody ProductDetails productDetails
-    ) throws IOException {
-//        ObjectMapper objectMapper = new ObjectMapper();
-//        ProductDetails productDetails = objectMapper.readValue(productDetailsJson, ProductDetails.class);
-
+    @PostMapping(value = "/addProducts",
+            consumes = { "multipart/form-data" })
+    public String addProducts(@RequestParam MultipartFile file,
+                              @RequestParam String prod_name, @RequestParam String prod_desc,
+                              @RequestParam String prod_price,
+                              @RequestParam String prod_category,
+                              @RequestParam String quantity
+                              ) throws IOException {
+        ProductDetails productDetails = new ProductDetails();
+        productDetails.setProd_name(prod_name);
+        productDetails.setProd_image(Base64.getEncoder().encodeToString(file.getBytes()));
+        productDetails.setProd_desc(prod_desc);
+        productDetails.setProd_price(prod_price);
+        productDetails.setCategory(new ProductCategory(categoryService.isCategory(prod_category)));
+        productDetails.setQuantity(quantity);
         System.out.println(productDetails);
-//        productDetails.setProd_image(Base64.getEncoder().encodeToString(file.getBytes()));
-        return detailsService.saveProduct(productDetails);
+        return  detailsService.saveProduct(productDetails);
     }
 
 
@@ -65,6 +73,7 @@ public class ProductDetailsController {
 
     @PostMapping("/addCategory")
     public ResponseEntity<?> newCategory(@RequestBody ProductCategory category){
+        System.out.println(category);
         return categoryService.addCategory(category);
     }
 

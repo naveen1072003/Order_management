@@ -18,6 +18,12 @@ public class CategoryService {
         categoryRepository.save(category);
         return ResponseEntity.ok("Category Added!");
     }
+
+    public Long isCategory(String categoryName){
+      return categoryRepository.findByCategoryName(categoryName).getId();
+
+    }
+
     public List<ProductCategory> getCategory() {
         return categoryRepository.findAll();
     }

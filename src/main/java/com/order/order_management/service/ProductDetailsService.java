@@ -18,9 +18,6 @@ public class ProductDetailsService {
 
 
     public String saveProduct(ProductDetails productDetails){
-
-
-
         productRepository.save(productDetails);
         return "Product Added Successfully!";
     }
@@ -47,6 +44,7 @@ public class ProductDetailsService {
 
 
     public List<ProductDetails> getAllProducts() {
+
         return productRepository.findAll();
     }
 }

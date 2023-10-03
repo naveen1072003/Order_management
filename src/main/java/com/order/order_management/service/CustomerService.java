@@ -60,7 +60,7 @@ public class CustomerService implements UserDetailsService {
             if (encoder.matches(customerLoginDto.getPassword(), customerDetails.get().getPassword())) {
                 return new ResponseEntity<>(jwtService.generateToken(customerLoginDto.getEmail()),HttpStatus.OK);
             }
-            return ResponseEntity.ok("You have entered wrong password");
+            return new ResponseEntity<>("You have entered wrong password",HttpStatus.NO_CONTENT);
         }
     }
 

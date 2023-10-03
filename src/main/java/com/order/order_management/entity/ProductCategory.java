@@ -23,6 +23,13 @@ public class ProductCategory {
     private Long id;
 
     @Column
-    private String category_name;
+    private String categoryName;
 
+    public ProductCategory(Long id){
+        this.id = id;
+    }
+
+    public ProductCategory() {
+
+    }
 }
