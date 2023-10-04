@@ -1,30 +1,49 @@
-package com.order.order_management.service;
+package com.order.order_management.service.Impl;
 
 import com.order.order_management.entity.ProductCategory;
 import com.order.order_management.entity.ProductDetails;
+import com.order.order_management.entity.StaffDetails;
 import com.order.order_management.repository.CategoryRepository;
 import com.order.order_management.repository.ProductRepository;
-import jakarta.transaction.Transactional;
+import com.order.order_management.repository.StaffRepository;
+import com.order.order_management.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class ProductDetailsService {
+public class AdminServiceImpl implements AdminService {
+
+
+    @Autowired
+    private StaffRepository staffRepository;
 
     @Autowired
     private ProductRepository productRepository;
 
+    @Autowired
+    private CategoryRepository categoryRepository;
+    public String saveStaffDetails(StaffDetails staffDetails) {
+        staffRepository.save(staffDetails);
+        return "Staff Details Saved!";
+    }
 
-    public String saveProduct(ProductDetails productDetails){
+    public String deleteStaff(long id) {
+        staffRepository.deleteById(id);
+        return "Staff Deleted!";
+    }
+
+
+    public String saveProduct(ProductDetails productDetails) {
         productRepository.save(productDetails);
         return "Product Added Successfully!";
     }
 
-    public String removeProduct(Long id){
-        ProductDetails  productDetails = productRepository.findById(id).get();
-        if(productDetails != null){
+    public String removeProduct(Long id) {
+        ProductDetails productDetails = productRepository.findById(id).get();
+        if (productDetails != null) {
             productRepository.deleteById(id);
             return "Product Removed Successfully";
         }
@@ -47,7 +66,23 @@ public class ProductDetailsService {
         return productRepository.findAllByCategory_CategoryName(category);
     }
 
-    public List<ProductDetails> productDetailsList(){
+    public List<ProductDetails> productDetailsList() {
         return productRepository.findAll();
     }
+
+    public ResponseEntity<?> addCategory(ProductCategory category){
+        categoryRepository.save(category);
+        return ResponseEntity.ok("Category Added!");
+    }
+
+    public Long isCategory(String categoryName){
+        return categoryRepository.findByCategoryName(categoryName).getId();
+
+    }
+
+    public List<ProductCategory> getCategory() {
+        return categoryRepository.findAll();
+    }
+
 }
+

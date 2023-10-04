@@ -4,12 +4,12 @@ import com.order.order_management.dto.CustomerLogindto;
 import com.order.order_management.entity.CustomerDetails;
 import com.order.order_management.entity.CustomerReview;
 import com.order.order_management.entity.OrdersDetails;
-import com.order.order_management.repository.CustomerRepository;
 import com.order.order_management.service.CustomerService;
-import com.order.order_management.service.OrderService;
+import com.order.order_management.service.Impl.CustomerServiceImpl;
+import com.order.order_management.service.Impl.OrderServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,46 +20,50 @@ import java.util.List;
 public class CustomerDetailsController {
 
     @Autowired
-    private CustomerService
-            customerService;
+    private CustomerService customerService;
 
     @Autowired
-    private OrderService orderService;
+    private OrderServiceImpl orderServiceImpl;
 
     // Adding New Customer
     @PostMapping("/newcustomer")
-    public ResponseEntity<?> newCustomer(@RequestBody CustomerDetails customerDetails){
+    @PreAuthorize("hasAuthority('USER')")
+    public ResponseEntity<?> newCustomer(@RequestBody CustomerDetails customerDetails) {
 //        System.out.println(customerDetails.toString());
+        customerDetails.setRoles("ROLE_USER");
         return customerService.saveCustomer(customerDetails);
     }
 
     // UserLogin
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody CustomerLogindto customerLoginDto){
+    public ResponseEntity<?> login(@RequestBody CustomerLogindto customerLoginDto) {
         System.out.println(customerLoginDto.toString());
         return customerService.loginAuthentication(customerLoginDto);
     }
 
     @PostMapping("/addReview")
-    public String addReview(@RequestBody CustomerReview review){
-        System.out.println(review);
+    @PreAuthorize("hasAuthority('USER')")
+    public String addReview(@RequestBody CustomerReview review) {
         return customerService.addReview(review);
     }
 
     @PostMapping("/newOrder")
-    public String orderdetail(@RequestBody OrdersDetails ordersDetails){
+    @PreAuthorize("hasAuthority('USER')")
+    public String orderdetail(@RequestBody OrdersDetails ordersDetails) {
         System.out.println(ordersDetails);
-        orderService.placeOrder(ordersDetails);
+        orderServiceImpl.placeOrder(ordersDetails);
         return "Order Added!!!";
     }
 
     @GetMapping("/getAllOrders")
-    public List<OrdersDetails> ordersDetails(){
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public List<OrdersDetails> ordersDetails() {
         return customerService.getOrders();
     }
 
     @GetMapping("/getAllCustomers")
-    public List<CustomerDetails>  customerDetails(){
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public List<CustomerDetails> customerDetails() {
         return customerService.getCustomers();
     }
 

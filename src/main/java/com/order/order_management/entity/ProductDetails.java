@@ -32,6 +32,15 @@ public class ProductDetails {
     @Column(name = "prod_desc")
     private String prod_desc;
 
+    @Column
+    private String modelNo;
+
+    @Column
+    private String frameColor;
+
+    @Column
+    private String frameWidth;
+
     @Column(name = "price")
     private String prod_price;
 

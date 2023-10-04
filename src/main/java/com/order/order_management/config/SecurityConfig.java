@@ -1,7 +1,7 @@
 package com.order.order_management.config;
 
 import com.order.order_management.filter.JwtAuthFilter;
-import com.order.order_management.service.CustomerService;
+import com.order.order_management.service.Impl.CustomerServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -32,7 +32,7 @@ public class SecurityConfig {
     // User Creation
     @Bean
     public UserDetailsService userDetailsService() {
-        return new CustomerService();
+        return new CustomerServiceImpl();
     }
 
     // Configuring HttpSecurity
@@ -41,13 +41,10 @@ public class SecurityConfig {
         System.out.println("config");
         return http.cors().and().csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/api/v1/customer/login").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .authenticationProvider(authenticationProvider())
+                .requestMatchers("/api/v1/customer/login", "/api/v1/products/sample").permitAll()
+                .requestMatchers("/api/v1/customer/*").hasAuthority("USER").anyRequest().authenticated()
+                .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and().authenticationProvider(authenticationProvider())
                 .addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
@@ -63,6 +60,7 @@ public class SecurityConfig {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
         authenticationProvider.setUserDetailsService(userDetailsService());
         authenticationProvider.setPasswordEncoder(passwordEncoder());
+        System.out.println(authenticationProvider);
         return authenticationProvider;
     }
 

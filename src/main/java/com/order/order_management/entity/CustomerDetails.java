@@ -48,4 +48,6 @@ public class CustomerDetails {
     @Column
     private Double cust_wallet_balance;
 
+    @Column
+    private String roles;
 }

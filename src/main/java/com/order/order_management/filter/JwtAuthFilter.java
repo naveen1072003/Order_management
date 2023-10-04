@@ -1,7 +1,7 @@
 package com.order.order_management.filter;
 
 
-import com.order.order_management.service.CustomerService;
+import com.order.order_management.service.Impl.CustomerServiceImpl;
 import com.order.order_management.service.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -26,10 +26,8 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     @Autowired
     private JwtService jwtService;
 
-
-    @Lazy
     @Autowired
-    private CustomerService userService;
+    private CustomerServiceImpl customerService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
@@ -46,7 +44,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         }
 
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            UserDetails userDetails = userService.loadUserByUsername(username);
+            UserDetails userDetails = customerService.loadUserByUsername(username);
             if (jwtService.validateToken(token, userDetails)) {
                 UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                 authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
