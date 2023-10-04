@@ -5,7 +5,9 @@ import com.order.order_management.dto.ImageDto;
 import com.order.order_management.dto.ProductDetailsDTO;
 import com.order.order_management.entity.ProductCategory;
 import com.order.order_management.entity.ProductDetails;
+import com.order.order_management.entity.StaffDetails;
 import com.order.order_management.repository.CategoryRepository;
+import com.order.order_management.service.AdminService;
 import com.order.order_management.service.CategoryService;
 import com.order.order_management.service.ProductDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +37,9 @@ public class ProductDetailsController {
     @Autowired
     CategoryRepository categoryRepository;
 
+    @Autowired
+    private AdminService adminService;
+
     @PostMapping(value = "/addProducts",
             consumes = { "multipart/form-data" })
     public String addProducts(@RequestParam MultipartFile file,
@@ -60,6 +65,11 @@ public class ProductDetailsController {
         System.out.println(category);
         return detailsService.getAllProducts(category);
     }
+    @GetMapping("/getProducts")
+    public List<ProductDetails> getAllProducts(){
+        System.out.println("hi");
+        return detailsService.productDetailsList();
+    }
 
     @DeleteMapping("/deleteProduct/{pid}")
     public String deleteProduct(@PathVariable Long pid){
@@ -83,5 +93,16 @@ public class ProductDetailsController {
         List<ProductCategory> productCategories = categoryService.getCategory();
         System.out.println(productCategories);
         return productCategories;
+    }
+
+    @PostMapping("/addStaff")
+    public String saveStaff(@RequestBody StaffDetails staffDetails){
+        return adminService.saveStaffDetails(staffDetails);
+    }
+
+    @PostMapping("/removeStaff")
+    public String removeStaff(Long id){
+
+        return adminService.deleteStaff(id);
     }
 }

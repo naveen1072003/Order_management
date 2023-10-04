@@ -12,18 +12,5 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/admin")
 public class AdminController {
 
-    @Autowired
-    private AdminService adminService;
 
-
-    @PostMapping("/addStaff")
-    public String saveStaff(@RequestBody StaffDetails staffDetails){
-        return adminService.saveStaffDetails(staffDetails);
-    }
-
-    @PostMapping("/removeStaff")
-    public String removeStaff(Long id){
-
-        return adminService.deleteStaff(id);
-    }
 }

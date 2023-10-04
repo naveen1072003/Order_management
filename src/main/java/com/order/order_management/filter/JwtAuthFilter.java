@@ -32,9 +32,6 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     private CustomerService userService;
 
     @Override
-//    @CrossOrigin(origins = "http://localhost:3000/",allowedHeaders = {"Authorization", "Origin"},
-//            exposedHeaders = {"Access-Control-Allow-Origin","Access-Control-Allow-Credentials"},
-//            allowCredentials = "true")
     protected void doFilterInternal(HttpServletRequest request,
                                     @NonNull HttpServletResponse response,
                                     @NonNull FilterChain filterChain) throws ServletException, IOException {
