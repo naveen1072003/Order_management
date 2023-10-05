@@ -80,6 +80,11 @@ public class CustomerServiceImpl implements UserDetailsService, CustomerService 
         return customerRepository.findAll();
     }
 
+    @Override
+    public List<OrdersDetails> getOrders(Long id) {
+        return orderRepository.findAllByCustomerDetails_Id(id);
+    }
+
     public List<OrdersDetails> getOrders() {
         return orderRepository.findAll();
     }

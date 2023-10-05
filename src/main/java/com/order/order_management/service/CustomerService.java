@@ -17,5 +17,5 @@ public interface CustomerService {
     ResponseEntity<?> loginAuthentication(CustomerLogindto customerLoginDto);
     String addReview(CustomerReview review);
     List<CustomerDetails> getCustomers();
-    List<OrdersDetails> getOrders();
+    List<OrdersDetails> getOrders(Long id);
 }

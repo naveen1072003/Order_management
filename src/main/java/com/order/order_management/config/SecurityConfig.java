@@ -41,8 +41,9 @@ public class SecurityConfig {
         System.out.println("config");
         return http.cors().and().csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/api/v1/customer/login", "/api/v1/products/sample").permitAll()
-                .requestMatchers("/api/v1/customer/*").hasAuthority("USER").anyRequest().authenticated()
+                .requestMatchers("/api/v1/customer/login", "/api/v1/customer/newcustomer").permitAll()
+                .requestMatchers("/api/v1/customer/*").hasAuthority("USER")
+                .requestMatchers("/api/v1/admin/*").hasAuthority("ADMIN").anyRequest().authenticated()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().authenticationProvider(authenticationProvider())
                 .addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class)

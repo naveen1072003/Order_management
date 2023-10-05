@@ -1,10 +1,9 @@
 package com.order.order_management.controller;
 
-import com.order.order_management.entity.ProductCategory;
-import com.order.order_management.entity.ProductDetails;
-import com.order.order_management.entity.StaffDetails;
+import com.order.order_management.entity.*;
 import com.order.order_management.repository.CategoryRepository;
 import com.order.order_management.service.AdminService;
+import com.order.order_management.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -17,7 +16,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/api/v1/products")
+@RequestMapping("/api/v1/admin")
 public class AdminController {
 
     @Autowired
@@ -26,6 +25,8 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
 
+    @Autowired
+    private CustomerService customerService;
 
     @PostMapping(value = "/addProducts", consumes = {"multipart/form-data"})
     @PreAuthorize("hasAuthority('ADMIN')")
@@ -40,7 +41,6 @@ public class AdminController {
         productDetails.setModelNo(modelNo);
         productDetails.setCategory(new ProductCategory(adminService.isCategory(prod_category)));
         productDetails.setQuantity(quantity);
-        System.out.println(frameColor + " " + frameWidth);
         return adminService.saveProduct(productDetails);
     }
 
@@ -55,7 +55,6 @@ public class AdminController {
     @GetMapping("/getProducts")
     @PreAuthorize("hasAuthority('ADMIN')")
     public List<ProductDetails> getAllProducts() {
-        System.out.println("hi");
         return adminService.productDetailsList();
     }
 
@@ -71,6 +70,18 @@ public class AdminController {
         adminService.updateProductById(pid, productDetails);
         return "Updated!";
     }
+    @GetMapping("/getAllCustomers")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public List<CustomerDetails> customerDetails() {
+        return customerService.getCustomers();
+    }
+
+//    @GetMapping("/getAllOrders")
+//    @PreAuthorize("hasAuthority('ADMIN')")
+//    public List<OrdersDetails> ordersDetails() {
+//        return customerService.getOrders();
+//    }
+
 
     @PostMapping("/addCategory")
     @PreAuthorize("hasAuthority('ADMIN')")

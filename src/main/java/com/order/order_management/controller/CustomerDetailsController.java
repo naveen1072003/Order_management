@@ -27,10 +27,9 @@ public class CustomerDetailsController {
 
     // Adding New Customer
     @PostMapping("/newcustomer")
-    @PreAuthorize("hasAuthority('USER')")
     public ResponseEntity<?> newCustomer(@RequestBody CustomerDetails customerDetails) {
 //        System.out.println(customerDetails.toString());
-        customerDetails.setRoles("ROLE_USER");
+//        customerDetails.setRoles("ROLE_USER");
         return customerService.saveCustomer(customerDetails);
     }
 
@@ -55,16 +54,11 @@ public class CustomerDetailsController {
         return "Order Added!!!";
     }
 
-    @GetMapping("/getAllOrders")
-    @PreAuthorize("hasAuthority('ADMIN')")
-    public List<OrdersDetails> ordersDetails() {
-        return customerService.getOrders();
+    @GetMapping("/getCustomerOrders/{custId}")
+    @PreAuthorize("hasAuthority('USER')")
+    public List<OrdersDetails> ordersDetails(@PathVariable Long custId) {
+        return customerService.getOrders(custId);
     }
 
-    @GetMapping("/getAllCustomers")
-    @PreAuthorize("hasAuthority('ADMIN')")
-    public List<CustomerDetails> customerDetails() {
-        return customerService.getCustomers();
-    }
 
 }
